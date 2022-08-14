@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/news_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <ImageView
+        android:id="@+id/error_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/no_item_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/no_internet"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/no_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_item_available"
+        android:textColor="@color/black_dm"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/no_item_text"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/retry"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Assignment</string>
     <string name="toolbar_main_title">NY Times Most Popular</string>
+
+    <string name="no_item_available">No item available!</string>
+    <string name="filter">Filter</string>
+    <string name="network_err_msg">No internet connection</string>
+    <string name="retry">Retry</string>
+    <string name="popular_by_month">Popular By Month</string>
+    <string name="popular_by_week">Popular By Week</string>
+    <string name="popular_today">Popular Today</string>
+    <string name="search">Search</string>
 </resources>
