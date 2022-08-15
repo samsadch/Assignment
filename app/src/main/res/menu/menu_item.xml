@@ -2,25 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:enabled="true"
-        app:showAsAction="always"
+    <item
         android:id="@+id/search"
+        android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
 
-    <item android:enabled="true"
+    <item
         android:id="@+id/filter_day"
-        android:iconTint="@color/white"
-        android:title="@string/popular_today"/>
+        android:enabled="true"
+        android:title="@string/popular_today" />
 
-    <item android:enabled="true"
+    <item
         android:id="@+id/filter_week"
-        android:iconTint="@color/white"
-        android:title="@string/popular_by_week"/>
+        android:enabled="true"
+        android:title="@string/popular_by_week" />
 
-    <item android:enabled="true"
+    <item
         android:id="@+id/filter_month"
-        android:iconTint="@color/white"
-        android:title="@string/popular_by_month"/>
+        android:enabled="true"
+        android:title="@string/popular_by_month" />
 </menu>

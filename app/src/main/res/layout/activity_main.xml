@@ -20,11 +20,11 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            android:theme="@style/SOActionBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:minHeight="?attr/actionBarSize"
             app:elevation="1dp"
-
             app:subtitleCentered="false"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_actionbar_menu"

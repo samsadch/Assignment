@@ -23,5 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController(R.id.nav_host_fragment_activity_home_screen).navigateUp()
         }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 }
