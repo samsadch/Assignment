@@ -40,14 +40,21 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQue
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         newsAdapter = NewsAdapter(this)
+        initViews()
+        setHasOptionsMenu(true)
+        observeData()
+    }
+
+    private fun initViews() {
         binding.apply {
             newsRcv.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = newsAdapter
             }
+            retryButton.setOnClickListener {
+                viewModel.getNews()
+            }
         }
-        setHasOptionsMenu(true)
-        observeData()
     }
 
     private fun observeData() {
@@ -58,7 +65,13 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQue
                         Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
                     }
                     is NewsListViewModel.NewsEvent.ShowProgress -> {
-                        binding.progress.isVisible = event.message
+                        binding.progress.isVisible = event.progress
+                    }
+                    NewsListViewModel.NewsEvent.ShowErrorMessage -> {
+                        if (newsAdapter.itemCount == 0) {
+                            binding.retryButton.isVisible = true
+                            binding.errorImage.isVisible = true
+                        }
                     }
                 }
             }
@@ -70,6 +83,7 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQue
                     binding.retryButton.isVisible = false
                     binding.newsRcv.isVisible = list.isNotEmpty()
                     binding.noItemText.isVisible = list.isEmpty()
+                    binding.errorImage.isVisible = false
                     newsAdapter.submitList(list)
                 } else {
                     binding.newsRcv.isVisible = true
@@ -89,10 +103,6 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQue
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.search -> {
-
-                true
-            }
             R.id.filter_day -> {
                 viewModel.getNews(1)
                 true
@@ -124,7 +134,7 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQue
 
     override fun onNewsClick(news: NewsData) {
         super.onNewsClick(news)
-        val action = NewsListFragmentDirections.actionNewsListFragmentToNewsDetailFragment(news)
+        val action = NewsListFragmentDirections.actionNewsListFragmentToNewsDetailFragment(news.id)
         findNavController().navigate(action)
     }
 

@@ -25,4 +25,7 @@ interface NewsDao {
 
     @Query("SELECT COUNT(*) FROM table_news")
     suspend fun getCount(): Int
+
+    @Query("SELECT * FROM table_news WHERE id=:newsId LIMIT 1")
+    fun getNewsById(newsId: Long): Flow<NewsData>
 }

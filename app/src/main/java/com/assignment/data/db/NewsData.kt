@@ -1,15 +1,12 @@
 package com.assignment.data.db
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
 
 /**
  * @Author: Samsad Chalil Valappil
  * @Date: 14/08/2022
  */
-@Parcelize
 @Entity(tableName = "table_news")
 data class NewsData(
     @PrimaryKey
@@ -30,4 +27,4 @@ data class NewsData(
     var url: String? = "",
     var thumbnail: String? = "",
     var threeByTwo: String? = "",
-) : Parcelable
+)

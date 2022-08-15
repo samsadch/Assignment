@@ -22,6 +22,7 @@ class NewsListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _query = MutableStateFlow("")
+    private val _recentTimePeriod = MutableStateFlow(1)
 
     private val newsEventChannelFlow = Channel<NewsEvent>()
     val newsEvent = newsEventChannelFlow.receiveAsFlow()
@@ -37,13 +38,13 @@ class NewsListViewModel @Inject constructor(
         }
     }
 
-    fun getNews(time: Int) = viewModelScope.launch {
+    fun getNews(time: Int = _recentTimePeriod.value) = viewModelScope.launch {
+        setRecentTimePeriod(time)
         repository.getNews(time, true, onFetchFailed = {
-            showMessage(it.message.toString())
-        },
-            onFetchSuccess = {
+            showErrorMessage()
+        }, onFetchSuccess = {
 
-            }).collect {
+        }).collect {
             when (it) {
                 is Resource.Error -> {
                     showProgress(false)
@@ -63,12 +64,20 @@ class NewsListViewModel @Inject constructor(
         newsEventChannelFlow.send(NewsEvent.ShowMessage(message))
     }
 
+    private fun showErrorMessage() = viewModelScope.launch {
+        newsEventChannelFlow.send(NewsEvent.ShowErrorMessage)
+    }
+
     private fun showProgress(isShow: Boolean) = viewModelScope.launch {
         newsEventChannelFlow.send(NewsEvent.ShowProgress(isShow))
     }
 
     fun setQuery(query: String) {
         _query.value = query
+    }
+
+    fun setRecentTimePeriod(recentValue: Int) {
+        _recentTimePeriod.value = recentValue
     }
 
     fun loadData(context: Context) = viewModelScope.launch {
@@ -81,7 +90,8 @@ class NewsListViewModel @Inject constructor(
 
     sealed class NewsEvent {
         data class ShowMessage(val message: String) : NewsEvent()
-        data class ShowProgress(val message: Boolean) : NewsEvent()
+        object ShowErrorMessage : NewsEvent()
+        data class ShowProgress(val progress: Boolean) : NewsEvent()
     }
 
 }

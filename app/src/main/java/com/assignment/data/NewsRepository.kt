@@ -57,4 +57,6 @@ class NewsRepository @Inject constructor(
         )
 
     fun getNewsFromDatabase(query: String) = newsDao.getAllNews(query)
+
+    suspend fun getNewsById(newsId: Long) = newsDao.getNewsById(newsId)
 }

@@ -36,7 +36,7 @@ data class Result(
         val thumb = if (media?.isNotEmpty() == true) {
             val data = media[0]
             if (data.mediaMetadata.isNotEmpty()) {
-                data.mediaMetadata.get(0).url
+                data.mediaMetadata[1].url
             } else {
                 ""
             }

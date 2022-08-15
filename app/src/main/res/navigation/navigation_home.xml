@@ -18,9 +18,9 @@
     <fragment
         android:id="@+id/newsDetailFragment"
         android:name="com.assignment.features.details.NewsDetailFragment"
-        tools:layout="@layout/fragment_news_detail">
+        tools:layout="@layout/fragment_news_details">
         <argument
-            android:name="news_data"
-            app:argType="com.assignment.data.db.NewsData" />
+            android:name="news_id"
+            app:argType="long" />
     </fragment>
 </navigation>

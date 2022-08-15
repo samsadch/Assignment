@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Assignment</string>
     <string name="toolbar_main_title">NY Times Most Popular</string>
+    <string name="toolbar_main_details">News Details</string>
 
     <string name="no_item_available">No item available!</string>
     <string name="filter">Filter</string>

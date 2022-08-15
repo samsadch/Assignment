@@ -51,10 +51,8 @@ class NewsAdapter(val listener: NewsCallBack) :
                 dateTxv.text = item.published_date
                 sourceText.text = item.source
 
-                //item.media[0].mediaMetadata[1].url
                 Glide.with(binding.root.context).load(item.thumbnail)
                     .placeholder(R.drawable.grey_round).into(thumbImage)
-                //setThumbImage(item,holder)
             }
         }
     }
