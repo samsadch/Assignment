@@ -8,8 +8,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.assignment.R
+import com.assignment.data.db.NewsData
 import com.assignment.databinding.FragmentNewsListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
  * @Date: 14/08/2022
  */
 @AndroidEntryPoint
-class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQueryTextListener {
+class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQueryTextListener,
+    NewsAdapter.NewsCallBack {
 
     private val viewModel: NewsListViewModel by viewModels()
     lateinit var binding: FragmentNewsListBinding
@@ -36,7 +39,7 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQue
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        newsAdapter = NewsAdapter()
+        newsAdapter = NewsAdapter(this)
         binding.apply {
             newsRcv.apply {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -116,6 +119,13 @@ class NewsListFragment : Fragment(R.layout.fragment_news_list), SearchView.OnQue
     override fun onQueryTextChange(newText: String?): Boolean {
         viewModel.setQuery(newText.toString())
         return true
+    }
+
+
+    override fun onNewsClick(news: NewsData) {
+        super.onNewsClick(news)
+        val action = NewsListFragmentDirections.actionNewsListFragmentToNewsDetailFragment(news)
+        findNavController().navigate(action)
     }
 
 }

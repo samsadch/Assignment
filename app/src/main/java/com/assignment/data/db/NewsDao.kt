@@ -19,7 +19,7 @@ interface NewsDao {
     suspend fun deleteNews()
 
 
-    @Query("SELECT * FROM table_news  WHERE title LIKE '%' ||  :query || '%' OR byline LIKE '%' ||  :query || '%' OR abstract LIKE '%' ||  :query || '%' ORDER BY updated ASC")
+    @Query("SELECT * FROM table_news  WHERE title LIKE '%' ||  :query || '%' OR byline LIKE '%' ||  :query || '%' ORDER BY updated ASC")
     fun getAllNews(query: String): Flow<List<NewsData>>
 
 

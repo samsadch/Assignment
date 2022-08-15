@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 /**
  * @Author: Samsad Chalil Valappil
  * @Date: 14/08/2022
- * samsad.valappil@thedigitalx.ae
  */
 
 //Mutable state flow always contains latest values where flow builder return all the values

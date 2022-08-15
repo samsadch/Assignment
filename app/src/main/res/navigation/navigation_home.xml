@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_home"
     android:label="NY Times Most Popular"
     app:startDestination="@id/newsListFragment">
@@ -8,5 +9,18 @@
     <fragment
         android:id="@+id/newsListFragment"
         android:name="com.assignment.features.list.NewsListFragment"
-        android:label="NY Times Most Popular" />
+        android:label="NY Times Most Popular"
+        tools:layout="@layout/fragment_news_list">
+        <action
+            android:id="@+id/action_newsListFragment_to_newsDetailFragment"
+            app:destination="@id/newsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.assignment.features.details.NewsDetailFragment"
+        tools:layout="@layout/fragment_news_detail">
+        <argument
+            android:name="news_data"
+            app:argType="com.assignment.data.db.NewsData" />
+    </fragment>
 </navigation>

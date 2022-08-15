@@ -14,7 +14,8 @@ import com.bumptech.glide.Glide
  * @Author: Samsad Chalil Valappil
  * @Date: 15/08/2022
  */
-class NewsAdapter : ListAdapter<NewsData, NewsAdapter.ViewHolder>(DiffCallBack()) {
+class NewsAdapter(val listener: NewsCallBack) :
+    ListAdapter<NewsData, NewsAdapter.ViewHolder>(DiffCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,6 +34,16 @@ class NewsAdapter : ListAdapter<NewsData, NewsAdapter.ViewHolder>(DiffCallBack()
     inner class ViewHolder(private val binding: ListItemNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            binding.apply {
+                root.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        listener.onNewsClick(getItem(adapterPosition))
+                    }
+                }
+            }
+        }
+
         fun bind(item: NewsData) {
             binding.apply {
                 headlineText.text = item.title
@@ -48,12 +59,17 @@ class NewsAdapter : ListAdapter<NewsData, NewsAdapter.ViewHolder>(DiffCallBack()
         }
     }
 
-    class DiffCallBack : DiffUtil.ItemCallback<NewsData>() {
-        override fun areItemsTheSame(oldItem: NewsData, newItem: NewsData) =
-            newItem.id == oldItem.id
+    interface NewsCallBack {
+        fun onNewsClick(news: NewsData) {
 
-        override fun areContentsTheSame(oldItem: NewsData, newItem: NewsData) = oldItem == newItem
-
+        }
     }
+}
+
+class DiffCallBack : DiffUtil.ItemCallback<NewsData>() {
+    override fun areItemsTheSame(oldItem: NewsData, newItem: NewsData) =
+        newItem.id == oldItem.id
+
+    override fun areContentsTheSame(oldItem: NewsData, newItem: NewsData) = oldItem == newItem
 
 }
