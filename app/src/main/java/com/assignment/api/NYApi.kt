@@ -14,6 +14,7 @@ interface NYApi {
     companion object {
         const val api_key = "oyeXz13H45Uqzjt9vuFUzQsSiHgVEbZ8"
         const val BASE_URL = "http://api.nytimes.com/svc/mostpopular/v2/"
+        const val PUBLISH_DATE_FORMAT = "yyyy-MM-dd"
     }
 
     @GET("mostviewed/{section}/{time-period}.json")

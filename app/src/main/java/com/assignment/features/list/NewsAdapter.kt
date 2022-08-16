@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.R
+import com.assignment.api.NYApi
 import com.assignment.data.db.NewsData
 import com.assignment.databinding.ListItemNewsBinding
+import com.assignment.utils.getDateString
 import com.bumptech.glide.Glide
 
 /**
@@ -48,7 +50,7 @@ class NewsAdapter(val listener: NewsCallBack) :
             binding.apply {
                 headlineText.text = item.title
                 byText.text = item.byline
-                dateTxv.text = item.published_date
+                dateTxv.text = getDateString(item.published_date!!.time, NYApi.PUBLISH_DATE_FORMAT)
                 sourceText.text = item.source
 
                 Glide.with(binding.root.context).load(item.thumbnail)

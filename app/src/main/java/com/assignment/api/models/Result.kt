@@ -1,7 +1,9 @@
 package com.assignment.api.models
 
 import android.os.Parcelable
+import com.assignment.api.NYApi
 import com.assignment.data.db.NewsData
+import com.assignment.utils.getDate
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -10,7 +12,7 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class Result(
-    val abstract: String? = "",
+    val abstract: String = "",
     val adx_keywords: String? = "",
     val asset_id: Long = 0L,
     val byline: String? = "",
@@ -45,11 +47,11 @@ data class Result(
         }
         return NewsData(
             id = id,
-            abstract = abstract,
+            abstract = this.abstract,
             asset_id = asset_id,
             byline = byline, column = column,
             nytdsection = nytdsection,
-            published_date = published_date,
+            published_date = getDate(published_date, NYApi.PUBLISH_DATE_FORMAT),
             section = section,
             source = source,
             subsection = subsection,

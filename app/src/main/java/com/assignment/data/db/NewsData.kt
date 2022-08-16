@@ -2,6 +2,9 @@ package com.assignment.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.assignment.api.NYApi.Companion.PUBLISH_DATE_FORMAT
+import com.assignment.utils.getDate
+import java.util.*
 
 /**
  * @Author: Samsad Chalil Valappil
@@ -16,7 +19,7 @@ data class NewsData(
     var byline: String? = "",
     var column: String? = "",
     var nytdsection: String? = "",
-    var published_date: String? = "",
+    var published_date: Date? = getDate(Date().time, PUBLISH_DATE_FORMAT),
     var section: String? = "",
     var source: String? = "",
     var subsection: String? = "",
