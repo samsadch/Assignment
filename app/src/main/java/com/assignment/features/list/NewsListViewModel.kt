@@ -1,11 +1,9 @@
 package com.assignment.features.list
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.assignment.data.NewsRepository
 import com.assignment.utils.Resource
-import com.assignment.utils.isNetworkAvailable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -60,10 +58,6 @@ class NewsListViewModel @Inject constructor(
     }
 
 
-    private fun showMessage(message: String) = viewModelScope.launch {
-        newsEventChannelFlow.send(NewsEvent.ShowMessage(message))
-    }
-
     private fun showErrorMessage() = viewModelScope.launch {
         newsEventChannelFlow.send(NewsEvent.ShowErrorMessage)
     }
@@ -76,16 +70,8 @@ class NewsListViewModel @Inject constructor(
         _query.value = query
     }
 
-    fun setRecentTimePeriod(recentValue: Int) {
+    private fun setRecentTimePeriod(recentValue: Int) {
         _recentTimePeriod.value = recentValue
-    }
-
-    fun loadData(context: Context) = viewModelScope.launch {
-        if (isNetworkAvailable(context)) {
-            //get data from api
-        } else {
-            //get data from dab- if no data show retry button
-        }
     }
 
     sealed class NewsEvent {

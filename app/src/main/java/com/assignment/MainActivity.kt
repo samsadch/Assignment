@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
-
         NavController.OnDestinationChangedListener { controller, destination, arguments ->
             title = when (destination.id) {
                 R.id.newsDetailFragment -> getString(R.string.toolbar_main_details)
