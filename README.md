@@ -34,7 +34,7 @@ From Android Studio:
     * Choose a module
     * Choose which tests to run. Click on Test: class and select one of the TestSuites
 
-FilterUtilsKtTest.kt contains JUnit4 style unit tests for the Filter logic.
+DateUtilsKtTest.kt contains JUnit4 style unit tests for the Filter logic.
 
 ***You need to add your API key***
 
