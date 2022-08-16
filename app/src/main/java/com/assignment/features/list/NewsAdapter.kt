@@ -2,6 +2,7 @@ package com.assignment.features.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -52,7 +53,7 @@ class NewsAdapter(val listener: NewsCallBack) :
                 byText.text = item.byline
                 dateTxv.text = getDateString(item.published_date!!.time, NYApi.PUBLISH_DATE_FORMAT)
                 sourceText.text = item.source
-
+                dividerLine.isVisible = itemCount - 1 != adapterPosition
                 Glide.with(binding.root.context).load(item.thumbnail)
                     .placeholder(R.drawable.grey_round).into(thumbImage)
             }

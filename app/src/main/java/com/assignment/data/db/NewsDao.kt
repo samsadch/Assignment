@@ -18,10 +18,8 @@ interface NewsDao {
     @Query("DELETE FROM table_news")
     suspend fun deleteNews()
 
-
     @Query("SELECT * FROM table_news  WHERE title LIKE '%' ||  :query || '%' OR byline LIKE '%' ||  :query || '%' ORDER BY published_date DESC")
     fun getAllNews(query: String): Flow<List<NewsData>>
-
 
     @Query("SELECT COUNT(*) FROM table_news")
     suspend fun getCount(): Int

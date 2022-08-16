@@ -51,7 +51,7 @@ data class Result(
             asset_id = asset_id,
             byline = byline, column = column,
             nytdsection = nytdsection,
-            published_date = getDate(published_date, NYApi.PUBLISH_DATE_FORMAT),
+            published_date = getDate(published_date?:"", NYApi.PUBLISH_DATE_FORMAT),
             section = section,
             source = source,
             subsection = subsection,
